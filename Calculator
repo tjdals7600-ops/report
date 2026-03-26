@@ -1,0 +1,50 @@
+package ExCalculator;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Calculator {
+    //private은 외부에서 접근하지 못하게 한다는 뜻
+    private List<Integer> results;
+
+    public Calculator() {
+        // 리스트 생성
+        results = new ArrayList<>();
+    }
+//연산을 수행할 메서드이고 반환타입이 정수여야하니 int 사용
+    public int calculate(int num1, int num2, String op) {
+        int result = 0;
+
+        //연산 수행
+
+        switch (op) {
+            case "+":
+                result = num1 + num2;
+                break;
+
+            case "-":
+                result = num1 - num2;
+                break;
+
+            case "*":
+                result = num1 * num2;
+                break;
+
+            case "/":      //0으로 나누는 예외처리 .. 강의 3-1 참고함
+                if (num2 == 0) {
+                    throw new ArithmeticException("0으로 나눌 수 없습니다");
+                }             //0을 나눌 수 없을 때 나오는 예외
+
+                result = num1 / num2;
+                break;
+
+            default:
+                throw new IllegalArgumentException("잘못된 연산자 입니다");
+                // 잘못된 인수를 입력할 때 나오는 예외
+
+        }
+
+        results.add(result);  // 계산 결과를 리스트에 저장
+
+        return result;
+    }
