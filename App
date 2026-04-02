@@ -5,22 +5,48 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();    //인스턴스 생성
-
         Scanner scanner = new Scanner(System.in);
 
+        while (true) {
 
-        System.out.println("0을 포함한 첫 번째 숫자를 입력하세요 : ");
-        int num1 = scanner.nextInt();
+            System.out.println("0을 포함한 첫 번째 숫자를 입력하세요 : ");
+            int num1 = scanner.nextInt();
 
+            System.out.println("연산 선택 +, -, *, / : ");
+            String op = scanner.next();
 
-        System.out.println("연산 선택 +, -, *, / : ");
-        String op = scanner.next();
+            System.out.println("0을 포함한 두 번째 숫자를 입력하세요 : ");
+            int num2 = scanner.nextInt();
 
+            try {            //예외가 발생할 수 있는 코드들이 담김
+                int result = calculator.calculate(num1, num2, op);  //calculator 호출
 
-        System.out.println("0을 포함한 두 번째 숫자를 입력하세요 : ");
-        int num2 = scanner.nextInt();
+                System.out.println("결과: " + result);  //결과 출력
 
+                System.out.println("저장된 결과: " + calculator.getResults()); // 저장된 결과 출력
 
+                calculator.removeFirstResult();
+                System.out.println("삭제 후 결과: " + calculator.getResults()); // 가장 먼저 저장된 데이터 값 삭제
 
+             //예외(Exception e)가 발생 시 catch 실행
+            } catch (Exception e) {       //"e" 라는 변수에 throw로 발생시킨 에러가 담김
+                System.out.println("오류 : " + e.getMessage());  //→ "e" 상자에 담긴 에러 메시지 문자열만 꺼내올 때 쓰는 메서드
             }
+            System.out.println("더 계산하시겠습니다? (exit 입력 시 종료: ");
+            String answer = scanner.next();
+
+            if (answer.equals("exit")) {
+                System.out.println("프로그램을 종료합니다.");
+                break;
+            }
+
+            System.out.println();      // 보기 좋게 줄바꿀 때 사용
+
         }
+
+        scanner.close();
+
+
+
+    }
+}
